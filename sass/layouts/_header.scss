@@ -1,0 +1,121 @@
+.header {
+    display: block;
+    background: url("../images/bg-stars.svg"),
+        linear-gradient(
+            0deg,
+            $color-primary-soft-red -300%,
+            $color-neutral-dark-blue 40%
+        );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    width: 100vw;
+    height: 70vh;
+    position: relative;
+
+    &__content {
+        transform: translateX(50%);
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    &__title {
+        padding: 5rem 0;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: $color-neutral-white;
+        font-size: 2rem;
+        letter-spacing: 10px;
+    }
+
+    &__time-box {
+        display: flex;
+    }
+
+    &__time {
+    }
+
+    &__time-card {
+        width: 16rem;
+        height: 16rem;
+        padding: 3rem;
+        margin: 2rem;
+        position: relative;
+
+        &::after,
+        &::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: 47%;
+            border: 6px solid $color-neutral-darker-blue;
+            z-index: 10;
+            border-radius: 50%;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+        }
+
+        &::after {
+            left: 0;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        &::before {
+            right: 0;
+            transform: translateX(50%) rotate(-135deg);
+        }
+
+        &__top,
+        &__bottom {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50%;
+        }
+
+        &__top {
+            top: 0;
+            border-radius: 10px 10px 0 0;
+            background-color: $color-neutral-desaturated-blue;
+        }
+
+        &__bottom {
+            top: 50%;
+            border-radius: 0 0 10px 10px;
+            background-color: lighten($color-neutral-desaturated-blue, 10%);
+            box-shadow: 0px 10px 0px 0px $color-neutral-darker-blue;
+        }
+
+        &__number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+            color: $color-primary-soft-red;
+            font-size: 8rem;
+        }
+
+        &__div {
+            width: 100%;
+            height: 3px;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            background-color: transparent;
+            border-top: 2px solid rgba($color-neutral-dark-blue, 0.3);
+            box-shadow: 0px 1px 4px 0px rgba($color-primary-grayish-blue, 0.3);
+        }
+
+        &__desc {
+            font-size: 1.5rem;
+            color: $color-primary-grayish-blue;
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+        }
+    }
+}

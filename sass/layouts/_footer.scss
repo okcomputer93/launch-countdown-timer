@@ -1,0 +1,37 @@
+.footer {
+    display: block;
+    width: 100vw;
+    height: 30vh;
+    background: url("../images/pattern-hills.svg"),
+        linear-gradient(
+            0deg,
+            $color-neutral-dark-blue 73%,
+            $color-primary-soft-red 300%
+        );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__social {
+        &-icon {
+            padding: 8rem 2rem;
+            cursor: pointer;
+        }
+    }
+
+    &__attribution {
+        color: $color-primary-grayish-blue;
+
+        &-link {
+            text-decoration: none;
+            color: $color-neutral-white;
+        }
+    }
+}
