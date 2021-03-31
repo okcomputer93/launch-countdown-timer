@@ -36,6 +36,7 @@
     }
 
     &__time {
+        perspective: 600px;
     }
 
     &__time-card {
@@ -78,6 +79,9 @@
         }
 
         &__top {
+            transition: transform 1s;
+            transform-origin: bottom;
+            transform-style: preserve-3d;
             top: 0;
             border-radius: 10px 10px 0 0;
             background-color: $color-neutral-desaturated-blue;
