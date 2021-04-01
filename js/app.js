@@ -1,4 +1,8 @@
-const time = [0, 0, 1, 20];
+// End Date (year, month 0 based, day, hours, seconds)
+const endDate = new Date(2021, 2, 31, 22, 35, 0);
+const nowDate = new Date();
+// Time in miliseconds so is divided by 1000
+let leftTime = (endDate - nowDate) / 1000;
 
 // Introduces '08' to 8 in an array
 // return an array of strings ready to be printed in DOM
@@ -20,16 +24,6 @@ const printTime = (timeArray) => {
     });
 };
 
-// receives an array of time [days, hours, minutes, seconds]
-// return 123132 seconds
-const arrayToSeconds = (timeArray) => {
-    const reference = [86400, 3600, 60, 1];
-    return timeArray.reduce(
-        (acc, current, index) => acc + current * reference[index],
-        0
-    );
-};
-
 // epoch is in seconds
 // return an array in the form [days, hours, minutes, seconds]
 const secondsToArray = (epoch) => {
@@ -42,10 +36,13 @@ const secondsToArray = (epoch) => {
 
 // Receives time in array form [days, hours, minutes, seconds]
 // Stores global time in SECONDS
-let currentTime = arrayToSeconds(time);
 const tick = () => {
-    currentTime = arrayToSeconds(secondsToArray(currentTime - 1));
-    const currentTimeArray = secondsToArray(currentTime);
+    leftTime = leftTime - 1;
+    if (leftTime <= 0) {
+        leftTime = 0;
+        clearInterval(interval);
+    }
+    const currentTimeArray = secondsToArray(leftTime);
     printTime(currentTimeArray);
 };
 
