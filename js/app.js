@@ -1,8 +1,10 @@
 // End Date (year, month 0 based, day, hours, seconds)
-const endDate = new Date(2021, 2, 31, 22, 35, 0);
+const endDate = new Date(2022, 3, 1, 0, 50, 0);
 const nowDate = new Date();
 // Time in miliseconds so is divided by 1000
 let leftTime = (endDate - nowDate) / 1000;
+
+let previousTimeArray = [];
 
 // Introduces '08' to 8 in an array
 // return an array of strings ready to be printed in DOM
@@ -16,12 +18,39 @@ const normalizeTime = (timeArray) => {
 
 // Print time in DOM
 const printTime = (timeArray) => {
-    const elements = ["days", "hours", "minutes", "seconds"];
+    const elements = timeElementsChanged(timeArray);
     const normalizeArray = normalizeTime(timeArray);
+
     elements.forEach((element, index) => {
-        document.querySelector(`.header__time-card--${element}`).textContent =
-            normalizeArray[index];
+        if (element) {
+            document.querySelector(
+                `.header__time-card--${element}`
+            ).textContent = normalizeArray[index];
+            const animationFlipElement = document.querySelector(
+                `.header__time-card__top--${element}`
+            );
+            animationFlipElement.classList.remove(
+                "header__time-card__top--animate"
+            );
+            void animationFlipElement.offsetWidth;
+            animationFlipElement.classList.add(
+                "header__time-card__top--animate"
+            );
+        }
     });
+};
+
+// Return an array with strings for the elements that changed
+// and false for the elements that didn't change
+// used to reprint only certain elements in DOM
+const timeElementsChanged = (timeArray) => {
+    const reference = ["days", "hours", "minutes", "seconds"];
+    const newReference = timeArray.map((time, index) => {
+        if (time !== previousTimeArray[index]) return reference[index];
+        return false;
+    });
+    previousTimeArray = timeArray;
+    return newReference;
 };
 
 // epoch is in seconds
@@ -34,8 +63,7 @@ const secondsToArray = (epoch) => {
     return [days, hours, minutes, seconds];
 };
 
-// Receives time in array form [days, hours, minutes, seconds]
-// Stores global time in SECONDS
+// Tick every second
 const tick = () => {
     leftTime = leftTime - 1;
     if (leftTime <= 0) {
@@ -47,5 +75,3 @@ const tick = () => {
 };
 
 interval = setInterval(tick, 1000);
-
-// $0.style.transform = "rotateX(-180deg)";

@@ -1,37 +1,55 @@
 .footer {
-    display: block;
-    width: 100vw;
     height: 30vh;
-    background: url("../images/pattern-hills.svg"),
-        linear-gradient(
-            0deg,
-            $color-neutral-dark-blue 73%,
-            $color-primary-soft-red 300%
-        );
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center center;
 
     &__container {
+        min-height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background: url("../images/pattern-hills.svg"),
+            linear-gradient(
+                0deg,
+                $color-neutral-dark-blue 73%,
+                $color-primary-soft-red 300%
+            );
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 
     &__social {
         &-icon {
             padding: 8rem 2rem;
             cursor: pointer;
+
+            &:hover,
+            &:active {
+                filter: invert(48%) sepia(99%) saturate(921%) hue-rotate(309deg)
+                    brightness(98%) contrast(100%);
+            }
         }
     }
 
     &__attribution {
         color: $color-primary-grayish-blue;
 
+        @media only screen and (max-width: $bp-large) {
+            padding: 2rem 0;
+        }
+
+        @media only screen and (max-width: $bp-small) {
+            font-size: 2rem;
+        }
+
         &-link {
             text-decoration: none;
             color: $color-neutral-white;
+
+            &:hover,
+            &:active {
+                color: $color-primary-soft-red;
+            }
         }
     }
 }

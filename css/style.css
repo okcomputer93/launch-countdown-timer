@@ -9,6 +9,12 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box; }
+  @media only screen and (max-width: 62.5em) {
+    html {
+      font-size: 35%; } }
+  @media only screen and (max-width: 37.5em) {
+    html {
+      font-size: 25%; } }
 
 body {
   font-family: "Red Hat Text", sans-serif;
@@ -16,12 +22,10 @@ body {
   background: linear-gradient(0deg, #1e1f29 72%, #fb6087 300%); }
 
 .header {
-  display: block;
   background: url("../images/bg-stars.svg"), linear-gradient(0deg, #fb6087 -300%, #1e1f29 40%);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: bottom center;
-  width: 100vw;
   height: 70vh;
   position: relative; }
   .header__content {
@@ -38,6 +42,14 @@ body {
     color: white;
     font-size: 2rem;
     letter-spacing: 10px; }
+    @media only screen and (max-width: 37.5em) {
+      .header__title {
+        font-size: 4rem;
+        text-align: center; } }
+    @media only screen and (max-width: 62.5em) {
+      .header__title {
+        font-size: 4rem;
+        text-align: center; } }
   .header__time-box {
     display: flex; }
   .header__time {
@@ -65,18 +77,23 @@ body {
     .header__time-card::before {
       right: 0;
       transform: translateX(50%) rotate(-135deg); }
-    .header__time-card__top, .header__time-card__bottom {
+    .header__time-card__top, .header__time-card__bottom, .header__time-card__top--back {
       position: absolute;
       left: 0;
       width: 100%;
       height: 50%; }
     .header__time-card__top {
-      transition: transform 1s;
       transform-origin: bottom;
       transform-style: preserve-3d;
       top: 0;
       border-radius: 10px 10px 0 0;
       background-color: #343650; }
+      .header__time-card__top--back {
+        top: 0;
+        border-radius: 10px 10px 0 0;
+        background-color: #343650; }
+      .header__time-card__top--animate {
+        animation: flipTimer 0.3s; }
     .header__time-card__bottom {
       top: 50%;
       border-radius: 0 0 10px 10px;
@@ -89,7 +106,7 @@ body {
       transform: translate(-50%, -50%);
       display: block;
       color: #fb6087;
-      font-size: 8rem; }
+      font-size: 7rem; }
     .header__time-card__div {
       width: 100%;
       height: 3px;
@@ -104,25 +121,47 @@ body {
       color: #8486a9;
       text-transform: uppercase;
       letter-spacing: 0.5rem; }
+      @media only screen and (max-width: 37.5em) {
+        .header__time-card__desc {
+          font-size: 2.5rem; } }
+
+@keyframes flipTimer {
+  from {
+    transform: rotateX(0deg);
+    background-color: #343650;
+    z-index: 100; }
+  to {
+    transform: rotateX(-180deg);
+    z-index: 0;
+    background-color: #494b6f; } }
 
 .footer {
-  display: block;
-  width: 100vw;
-  height: 30vh;
-  background: url("../images/pattern-hills.svg"), linear-gradient(0deg, #1e1f29 73%, #fb6087 300%);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center; }
+  height: 30vh; }
   .footer__container {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; }
+    align-items: center;
+    background: url("../images/pattern-hills.svg"), linear-gradient(0deg, #1e1f29 73%, #fb6087 300%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center; }
   .footer__social-icon {
     padding: 8rem 2rem;
     cursor: pointer; }
+    .footer__social-icon:hover, .footer__social-icon:active {
+      filter: invert(48%) sepia(99%) saturate(921%) hue-rotate(309deg) brightness(98%) contrast(100%); }
   .footer__attribution {
     color: #8486a9; }
+    @media only screen and (max-width: 62.5em) {
+      .footer__attribution {
+        padding: 2rem 0; } }
+    @media only screen and (max-width: 37.5em) {
+      .footer__attribution {
+        font-size: 2rem; } }
     .footer__attribution-link {
       text-decoration: none;
       color: white; }
+      .footer__attribution-link:hover, .footer__attribution-link:active {
+        color: #fb6087; }

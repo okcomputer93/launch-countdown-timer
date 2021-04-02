@@ -1,5 +1,4 @@
 .header {
-    display: block;
     background: url("../images/bg-stars.svg"),
         linear-gradient(
             0deg,
@@ -9,7 +8,6 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: bottom center;
-    width: 100vw;
     height: 70vh;
     position: relative;
 
@@ -29,6 +27,16 @@
         color: $color-neutral-white;
         font-size: 2rem;
         letter-spacing: 10px;
+
+        @media only screen and (max-width: $bp-small) {
+            font-size: 4rem;
+            text-align: center;
+        }
+
+        @media only screen and (max-width: $bp-large) {
+            font-size: 4rem;
+            text-align: center;
+        }
     }
 
     &__time-box {
@@ -71,7 +79,8 @@
         }
 
         &__top,
-        &__bottom {
+        &__bottom,
+        &__top--back {
             position: absolute;
             left: 0;
             width: 100%;
@@ -79,12 +88,22 @@
         }
 
         &__top {
-            transition: transform 1s;
+            // transition: transform 1s;
             transform-origin: bottom;
             transform-style: preserve-3d;
             top: 0;
             border-radius: 10px 10px 0 0;
             background-color: $color-neutral-desaturated-blue;
+
+            &--back {
+                top: 0;
+                border-radius: 10px 10px 0 0;
+                background-color: $color-neutral-desaturated-blue;
+            }
+
+            &--animate {
+                animation: flipTimer 0.3s;
+            }
         }
 
         &__bottom {
@@ -101,7 +120,7 @@
             transform: translate(-50%, -50%);
             display: block;
             color: $color-primary-soft-red;
-            font-size: 8rem;
+            font-size: 7rem;
         }
 
         &__div {
@@ -120,6 +139,24 @@
             color: $color-primary-grayish-blue;
             text-transform: uppercase;
             letter-spacing: 0.5rem;
+
+            @media only screen and (max-width: $bp-small) {
+                font-size: 2.5rem;
+            }
         }
+    }
+}
+
+@keyframes flipTimer {
+    from {
+        transform: rotateX(0deg);
+        background-color: $color-neutral-desaturated-blue;
+        z-index: 100;
+    }
+
+    to {
+        transform: rotateX(-180deg);
+        z-index: 0;
+        background-color: lighten($color-neutral-desaturated-blue, 10%);
     }
 }
