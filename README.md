@@ -72,4 +72,4 @@ The code in Javascript can be improved in the future using ES6 Classes, it's ok 
 
 ## Author
 
--   Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/okcomputer93)
+-   Frontend Mentor - [@okcomputer93](https://www.frontendmentor.io/profile/okcomputer93)
