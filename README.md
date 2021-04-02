@@ -68,6 +68,7 @@ animationFlipElement.classList.add("header__time-card__top--animate");
 
 ### Continued development
 
+Improve flip animation.
 The code in Javascript can be improved in the future using ES6 Classes, it's ok for an isolated application for now.
 
 ## Author
