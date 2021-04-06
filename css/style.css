@@ -52,67 +52,59 @@ body {
         text-align: center; } }
   .header__time-box {
     display: flex; }
-  .header__time {
-    perspective: 600px; }
   .header__time-card {
     width: 16rem;
     height: 16rem;
-    padding: 3rem;
     margin: 2rem;
-    position: relative; }
-    .header__time-card::after, .header__time-card::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      position: absolute;
-      top: 47%;
-      border: 6px solid #191a24;
-      z-index: 10;
-      border-radius: 50%;
-      border-bottom-color: transparent;
-      border-left-color: transparent; }
-    .header__time-card::after {
-      left: 0;
-      transform: translateX(-50%) rotate(45deg); }
-    .header__time-card::before {
-      right: 0;
-      transform: translateX(50%) rotate(-135deg); }
-    .header__time-card__top, .header__time-card__bottom, .header__time-card__top--back {
-      position: absolute;
-      left: 0;
+    position: relative;
+    perspective: 300px;
+    -moz-perspective: 300px; }
+    .header__time-card__center {
       width: 100%;
-      height: 50%; }
-    .header__time-card__top {
-      transform-origin: bottom;
-      transform-style: preserve-3d;
-      top: 0;
-      border-radius: 10px 10px 0 0;
-      background-color: #343650; }
-      .header__time-card__top--back {
-        top: 0;
-        border-radius: 10px 10px 0 0;
-        background-color: #343650; }
-      .header__time-card__top--animate {
-        animation: flipTimer 0.3s; }
-    .header__time-card__bottom {
-      top: 50%;
-      border-radius: 0 0 10px 10px;
-      background-color: #494b6f;
-      box-shadow: 0px 10px 0px 0px #191a24; }
-    .header__time-card__number {
+      height: 100%;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      z-index: 9;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transition: transform 1s ease-in-out; }
+      .header__time-card__center--front, .header__time-card__center--back {
+        transform: rotateX(0deg);
+        position: absolute;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden; }
+      .header__time-card__center--back {
+        transform: rotateX(180deg); }
+    .header__time-card__top, .header__time-card__center--back, .header__time-card__center--front, .header__time-card__bottom {
+      width: 100%;
+      height: 50%;
+      background-color: #343650;
+      overflow: hidden; }
+    .header__time-card__top, .header__time-card__center--back, .header__time-card__center--front {
+      border-radius: 10px 10px 0 0; }
+    .header__time-card__center--front {
+      background: -webkit-radial-gradient(4em 4em, circle, transparent 0.55em, #343650 0.55em) -4em 12em; }
+    .header__time-card__bottom {
+      transform: translateY(100%); }
+    .header__time-card__bottom, .header__time-card__center--back {
+      background: -webkit-radial-gradient(2em 2em, circle, transparent 0.55em, #343650 0.55em) -2em -2em;
+      border-radius: 0 0 10px 10px; }
+    .header__time-card__number {
       display: block;
       color: #fb6087;
       font-size: 7rem; }
+      .header__time-card__number--top {
+        transform: translateY(36%); }
+      .header__time-card__number--bottom {
+        transform: translateY(-49%); }
     .header__time-card__div {
       width: 100%;
       height: 3px;
       position: absolute;
       top: 50%;
       left: 0;
+      z-index: 10;
       background-color: transparent;
       border-top: 2px solid rgba(30, 31, 41, 0.3);
       box-shadow: 0px 1px 4px 0px rgba(132, 134, 169, 0.3); }
@@ -124,16 +116,6 @@ body {
       @media only screen and (max-width: 37.5em) {
         .header__time-card__desc {
           font-size: 2.5rem; } }
-
-@keyframes flipTimer {
-  from {
-    transform: rotateX(0deg);
-    background-color: #343650;
-    z-index: 100; }
-  to {
-    transform: rotateX(-180deg);
-    z-index: 0;
-    background-color: #494b6f; } }
 
 .footer {
   height: 30vh; }
@@ -148,7 +130,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center; }
   .footer__social-icon {
-    padding: 8rem 2rem;
+    margin: 8rem 2rem;
     cursor: pointer; }
     .footer__social-icon:hover, .footer__social-icon:active {
       filter: invert(48%) sepia(99%) saturate(921%) hue-rotate(309deg) brightness(98%) contrast(100%); }

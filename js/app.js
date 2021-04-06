@@ -23,20 +23,69 @@ const printTime = (timeArray) => {
 
     elements.forEach((element, index) => {
         if (element) {
-            document.querySelector(
-                `.header__time-card--${element}`
-            ).textContent = normalizeArray[index];
-            const animationFlipElement = document.querySelector(
-                `.header__time-card__top--${element}`
-            );
-            animationFlipElement.classList.remove(
-                "header__time-card__top--animate"
-            );
-            void animationFlipElement.offsetWidth;
-            animationFlipElement.classList.add(
-                "header__time-card__top--animate"
-            );
+            handleAnimation(element, index, normalizeArray);
         }
+    });
+};
+
+const handleAnimation = (element, index, normalizedArray) => {
+    const centerAnimateElement = document.querySelector(
+        `.header__time-card__center--${element}`
+    );
+
+    // Uff way too hacky?
+    const innerNodes = document.querySelectorAll(
+        `.header__time-card__center--${element}`
+    );
+
+    if (innerNodes.length >= 3) {
+        innerNodes[2].remove();
+    }
+
+    centerAnimateElement.querySelector(
+        `.header__time-card__center--back__number--${element}`
+    ).textContent = normalizedArray[index];
+
+    const html = `
+    <div
+        class="header__time-card__center header__time-card__center--${element}"
+    >
+        <div class="header__time-card__center--back">
+            <h2
+                class="header__time-card__number header__time-card__number--bottom header__time-card__center--back__number--${element}"
+            >
+                 ${normalizedArray[index]}
+            </h2>
+        </div>
+        <div class="header__time-card__center--front">
+            <h2
+                class="header__time-card__number header__time-card__number--top header__time-card__center--front__number--${element}"
+            >
+                 ${normalizedArray[index]}
+            </h2>
+        </div>
+    </div>`;
+
+    document
+        .querySelector(`.header__time-card--${element}`)
+        .insertAdjacentHTML("afterbegin", html);
+
+    centerAnimateElement.style.transform = "rotateX(-180deg)";
+
+    const sibling = centerAnimateElement.nextElementSibling;
+
+    // Performance fix
+    if (element === "seconds" && element === "minutes") {
+        setTimeout(() => {
+            centerAnimateElement.style.zIndex = 1;
+            sibling.remove();
+        }, 1580);
+        return;
+    }
+
+    centerAnimateElement.addEventListener("transitionend", function () {
+        this.style.zIndex = 1;
+        sibling.remove();
     });
 };
 
@@ -51,6 +100,16 @@ const timeElementsChanged = (timeArray) => {
     });
     previousTimeArray = timeArray;
     return newReference;
+};
+
+// receives an array of time [days, hours, minutes, seconds]
+// return 123132 seconds
+const arrayToSeconds = (timeArray) => {
+    const reference = [86400, 3600, 60, 1];
+    return timeArray.reduce(
+        (acc, current, index) => acc + current * reference[index],
+        0
+    );
 };
 
 // epoch is in seconds
